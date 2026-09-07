@@ -1,0 +1,10 @@
+spring:
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb://localhost:27017/fiap_esg_test}
+      auto-index-creation: false
+
+app:
+  security:
+    username: admin
+    password: admin123

@@ -1,0 +1,22 @@
+services:
+  mongodb:
+    image: mongo:4.4
+    container_name: fiap-esg-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=fiap_esg
+    volumes:
+      - mongodb_data:/data/db
+      - ./scripts/docker-init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - fiap-network
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  fiap-network:
+    driver: bridge

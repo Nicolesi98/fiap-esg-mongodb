@@ -1,0 +1,593 @@
+{
+  "info": {
+    "_postman_id": "b71282d5-9a1a-4e0a-bc3b-5e0704baaeec",
+    "name": "FIAP ESG Energia",
+    "description": "Collection para testar o microservico ESG de consumo de energia. Configure baseUrl se a aplicacao estiver em outra porta. As operacoes GET sao publicas; POST, PUT e DELETE usam Basic Auth.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "2887719"
+  },
+  "item": [
+    {
+      "name": "Empresas",
+      "item": [
+        {
+          "name": "GET Listar empresas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/empresas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "empresas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Buscar empresa por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/empresas/{{empresaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "empresas",
+                "{{empresaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Criar empresa",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Energia Eficiente LTDA\",\n  \"cnpj\": \"66.666.666/0001-66\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/empresas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "empresas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Atualizar empresa",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Energia Eficiente Brasil LTDA\",\n  \"cnpj\": \"66.666.666/0001-66\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/empresas/{{empresaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "empresas",
+                "{{empresaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Excluir empresa",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/empresas/4",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "empresas",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Equipamentos",
+      "item": [
+        {
+          "name": "GET Listar equipamentos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/equipamentos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "equipamentos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Listar por empresa",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/equipamentos?empresaId={{empresaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "equipamentos"
+              ],
+              "query": [
+                {
+                  "key": "empresaId",
+                  "value": "{{empresaId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Buscar equipamento por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/equipamentos/{{equipamentoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "equipamentos",
+                "{{equipamentoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Criar equipamento",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"empresa\": {\n    \"id\": {{empresaId}}\n  },\n  \"nome\": \"Medidor Inteligente\",\n  \"tipo\": \"MONITORAMENTO\",\n  \"status\": \"LIGADO\",\n  \"limiteConsumoKwh\": 35.50,\n  \"limiteOciosidadeMin\": 20\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/equipamentos",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "equipamentos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Atualizar equipamento",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"empresa\": {\n    \"id\": {{empresaId}}\n  },\n  \"nome\": \"Medidor Inteligente Atualizado\",\n  \"tipo\": \"MONITORAMENTO\",\n  \"status\": \"ATENCAO\",\n  \"limiteConsumoKwh\": 30.00,\n  \"limiteOciosidadeMin\": 15\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/equipamentos/{{equipamentoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "equipamentos",
+                "{{equipamentoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Excluir equipamento",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/equipamentos/3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "equipamentos",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Consumos Energia",
+      "item": [
+        {
+          "name": "GET Listar consumos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consumos-energia",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumos-energia"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Listar por equipamento",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consumos-energia?equipamentoId={{equipamentoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumos-energia"
+              ],
+              "query": [
+                {
+                  "key": "equipamentoId",
+                  "value": "{{equipamentoId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Buscar consumo por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consumos-energia/{{consumoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumos-energia",
+                "{{consumoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Registrar consumo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"equipamento\": {\n    \"id\": {{equipamentoId}}\n  },\n  \"consumoKwh\": 42.75,\n  \"tempoOciosoMin\": 12\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/consumos-energia",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumos-energia"
+              ]
+            },
+            "description": "Ao registrar consumo acima dos limites do equipamento, as triggers do banco podem criar alertas automaticamente."
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Atualizar consumo",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"equipamento\": {\n    \"id\": {{equipamentoId}}\n  },\n  \"dataHora\": \"2026-05-09T20:00:00\",\n  \"consumoKwh\": 28.40,\n  \"tempoOciosoMin\": 5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/consumos-energia/{{consumoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumos-energia",
+                "{{consumoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Excluir consumo",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/consumos-energia/3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "consumos-energia",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Alertas",
+      "item": [
+        {
+          "name": "GET Listar alertas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/alertas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alertas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Listar por equipamento",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/alertas?equipamentoId={{equipamentoId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alertas"
+              ],
+              "query": [
+                {
+                  "key": "equipamentoId",
+                  "value": "{{equipamentoId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Listar por status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/alertas?status=ABERTO",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alertas"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "ABERTO"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Buscar alerta por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/alertas/{{alertaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alertas",
+                "{{alertaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Criar alerta manual",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"equipamento\": {\n    \"id\": {{equipamentoId}}\n  },\n  \"tipoAlerta\": \"MANUTENCAO_PREVENTIVA\",\n  \"mensagem\": \"Verificar consumo fora do padrao.\",\n  \"status\": \"ABERTO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/alertas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alertas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Resolver alerta",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"equipamento\": {\n    \"id\": {{equipamentoId}}\n  },\n  \"dataHora\": \"2026-05-09T20:00:00\",\n  \"tipoAlerta\": \"CONSUMO_ALTO\",\n  \"mensagem\": \"Consumo revisado pela equipe responsavel.\",\n  \"status\": \"RESOLVIDO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/alertas/{{alertaId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alertas",
+                "{{alertaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Excluir alerta",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/alertas/2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alertas",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{username}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{password}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "username",
+      "value": "admin"
+    },
+    {
+      "key": "password",
+      "value": "admin123"
+    },
+    {
+      "key": "empresaId",
+      "value": "1"
+    },
+    {
+      "key": "equipamentoId",
+      "value": "1"
+    },
+    {
+      "key": "consumoId",
+      "value": "1"
+    },
+    {
+      "key": "alertaId",
+      "value": "1"
+    }
+  ]
+}
