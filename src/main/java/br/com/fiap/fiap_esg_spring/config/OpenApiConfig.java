@@ -17,6 +17,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         String dataHora = LocalDateTime.now()
+                .minusHours(3)
                 .format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
         return new OpenAPI()
                 .info(new Info()
