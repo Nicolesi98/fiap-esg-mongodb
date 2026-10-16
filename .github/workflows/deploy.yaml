@@ -1,0 +1,16 @@
+name: Deploy to Render
+on:
+  push:
+    branches:
+      - staging
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Deploy to Staging
+        if: github.ref == 'refs/heads/staging'
+        run: curl -s "${{ secrets.RENDER_DEPLOY_STAGING_URL }}"
+      - name: Deploy to Production
+        if: github.ref == 'refs/heads/main'
+        run: curl -s "${{ secrets.RENDER_DEPLOY_PROD_URL }}"
