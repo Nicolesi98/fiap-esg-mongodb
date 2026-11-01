@@ -1,16 +1,84 @@
-name: Deploy to Render
+name: CI / CD — Testes e Deploy
+
 on:
   push:
-    branches:
-      - staging
-      - main
+    branches: ["**"]
+  pull_request:
+    branches: [main, staging]
+
 jobs:
+  # =========================================================================
+  # JOB 1: Testes do microserviço ESG (Spring Boot + MongoDB)
+  # =========================================================================
+  tests-esg-api:
+    name: "ESG API — Testes Unitários, API Contract e BDD"
+    runs-on: ubuntu-latest
+    env:
+      SPRING_DATA_MONGODB_URI: mongodb://localhost:27017/fiap_esg_test
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          cache: maven
+
+      - name: Rodar todos os testes (unitários + API contract + BDD Cucumber)
+        run: |
+          chmod +x mvnw
+          ./mvnw test --no-transfer-progress
+
+      - name: Publicar relatório de cobertura JaCoCo
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
+          retention-days: 30
+
+      - name: Publicar relatório BDD Cucumber (HTML)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cucumber-report
+          path: target/cucumber-reports/
+          retention-days: 30
+
+      - name: Publicar relatório de testes Surefire (JUnit XML)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: surefire-report
+          path: target/surefire-reports/
+          retention-days: 30
+
+      - name: Publicar resultado de testes (GitHub Check)
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: "Resultados dos Testes JUnit"
+          path: "target/surefire-reports/*.xml"
+          reporter: java-junit
+          fail-on-error: true
+
+  # =========================================================================
+  # JOB 2: Deploy — só roda em main/staging e somente se os testes passarem
+  # =========================================================================
   deploy:
+    name: "Deploy to Render"
     runs-on: ubuntu-24.04
+    needs: tests-esg-api
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/staging')
+
     steps:
       - name: Deploy to Staging
         if: github.ref == 'refs/heads/staging'
         run: curl -s "${{ secrets.RENDER_DEPLOY_STAGING_URL }}"
+
       - name: Deploy to Production
         if: github.ref == 'refs/heads/main'
         run: curl -s "${{ secrets.RENDER_DEPLOY_PROD_URL }}"
