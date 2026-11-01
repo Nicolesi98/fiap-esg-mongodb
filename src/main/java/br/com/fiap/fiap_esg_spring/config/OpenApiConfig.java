@@ -24,7 +24,7 @@ public class OpenApiConfig {
                         .title("FIAP ESG API")
                         .version("1.0.0")
                         .description("API do projeto FIAP ESG com Spring Boot e MongoDB. " +
-                                "Servidor production iniciado em: " + dataHora)
+                                "Servidor staging iniciado em: " + dataHora)
                 )
                 .addSecurityItem(new io.swagger.v3.oas.models.security.SecurityRequirement()
                         .addList("basicAuth"));
