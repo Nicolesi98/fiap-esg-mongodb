@@ -1,0 +1,19 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Equipamento",
+  "type": "object",
+  "properties": {
+    "id": { "type": ["string", "null"] },
+    "empresaId": { "type": ["string", "null"] },
+    "nome": { "type": "string", "maxLength": 100 },
+    "tipo": { "type": ["string", "null"], "maxLength": 50 },
+    "categoria": { "type": ["string", "null"] },
+    "status": { "type": ["string", "null"], "enum": ["LIGADO", "DESLIGADO", "ATENCAO", null] },
+    "limiteConsumoKwh": { "type": ["number", "null"] },
+    "limiteOciosidadeMin": { "type": ["integer", "null"] },
+    "localizacao": { "type": ["object", "null"] },
+    "especificacoesTecnicas": { "type": ["object", "null"] },
+    "dataInstalacao": { "type": ["string", "null"] }
+  },
+  "required": ["nome", "limiteConsumoKwh", "limiteOciosidadeMin"]
+}

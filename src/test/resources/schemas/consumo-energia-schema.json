@@ -1,0 +1,16 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ConsumoEnergia",
+  "type": "object",
+  "properties": {
+    "id": { "type": ["string", "null"] },
+    "equipamentoId": { "type": ["string", "null"] },
+    "tipoRecurso": { "type": ["string", "null"] },
+    "dataHora": { "type": ["string", "null"] },
+    "consumoKwh": { "type": "number", "minimum": 0 },
+    "tempoOciosoMin": { "type": ["integer", "null"], "minimum": 0 },
+    "pegadaCarbonoKgCo2e": { "type": ["number", "null"] },
+    "telemetriaDetalhada": { "type": ["object", "null"] }
+  },
+  "required": ["consumoKwh", "tempoOciosoMin"]
+}

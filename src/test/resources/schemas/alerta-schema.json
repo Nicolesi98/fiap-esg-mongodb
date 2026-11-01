@@ -1,0 +1,18 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Alerta",
+  "type": "object",
+  "properties": {
+    "id": { "type": ["string", "null"] },
+    "equipamentoId": { "type": ["string", "null"] },
+    "pilarEsg": { "type": ["string", "null"] },
+    "dataHora": { "type": ["string", "null"] },
+    "tipoAlerta": { "type": "string", "maxLength": 50 },
+    "mensagem": { "type": "string", "maxLength": 250 },
+    "severidade": { "type": ["string", "null"] },
+    "status": { "type": ["string", "null"], "enum": ["ABERTO", "RESOLVIDO", null] },
+    "dadosContextuais": { "type": ["object", "null"] },
+    "historicoAcoes": { "type": "array" }
+  },
+  "required": ["tipoAlerta", "mensagem", "status"]
+}
