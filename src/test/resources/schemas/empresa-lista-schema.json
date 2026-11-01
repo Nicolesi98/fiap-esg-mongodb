@@ -1,0 +1,16 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EmpresaLista",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": ["string", "null"] },
+      "nome": { "type": "string", "maxLength": 100 },
+      "cnpj": { "type": ["string", "null"], "maxLength": 18 },
+      "setor": { "type": ["string", "null"] },
+      "statusAdesaoEsg": { "type": ["string", "null"] }
+    },
+    "required": ["nome"]
+  }
+}

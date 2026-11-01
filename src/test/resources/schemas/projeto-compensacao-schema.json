@@ -1,0 +1,18 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProjetoCompensacao",
+  "type": "object",
+  "properties": {
+    "id": { "type": ["string", "null"] },
+    "empresaId": { "type": "string" },
+    "nomeIniciativa": { "type": "string" },
+    "tipoProjeto": { "type": "string" },
+    "status": { "type": ["string", "null"] },
+    "metaTco2eCompensar": { "type": "number" },
+    "tco2eCompensadoAcumulado": { "type": ["number", "null"] },
+    "investimentoBrl": { "type": ["number", "null"] },
+    "detalhesExecucao": { "type": ["object", "null"] },
+    "dataInicio": { "type": ["string", "null"] }
+  },
+  "required": ["empresaId", "nomeIniciativa", "tipoProjeto", "metaTco2eCompensar"]
+}
